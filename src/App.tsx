@@ -9,9 +9,17 @@ import {
 } from "@react-three/xr";
 import { Canvas } from "@react-three/fiber";
 import { Box } from "./components/Box";
-import { ContactShadows, OrbitControls } from "@react-three/drei";
+import { ContactShadows, OrbitControls, Sky } from "@react-three/drei";
 import { Model } from "./components/Model";
 
+function Floor() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <planeGeometry args={[40, 40]} />
+      <meshStandardMaterial color="#666" />
+    </mesh>
+  );
+}
 function App() {
   return (
     <>
@@ -22,10 +30,12 @@ function App() {
 
       <Canvas>
         <XR>
-          <Controllers />
-          <Hands />
+          <Sky sunPosition={[0, 1, 0]} />
+          <Floor />
           <hemisphereLight color="white" groundColor="blue" intensity={0.75} />
           <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} />
+          <Controllers />
+          <OrbitControls />
           <group position={[0, -10, 0]}>
             <RayGrab>
               <Model
@@ -35,10 +45,7 @@ function App() {
                 }
               />
             </RayGrab>
-
-            <ContactShadows scale={20} blur={10} far={20} />
           </group>
-          <OrbitControls />
         </XR>
       </Canvas>
     </>
