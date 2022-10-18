@@ -36,7 +36,7 @@ function App() {
           <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} />
           <Controllers />
           <OrbitControls />
-          <group position={[0, -10, 0]}>
+          <group position={[0, 0, -4]}>
             <RayGrab>
               <Model
                 position={[0, 0.25, 0]}
